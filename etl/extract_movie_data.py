@@ -70,7 +70,7 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
 
     tmdb_api_key = 'd021967347b5820224a56f0b1c0496b4'  # Replace with your actual TMDB API key
-    num_movies = 50 # Set the number of movies to fetch
+    num_movies = 10 # Set the number of movies to fetch
 
     current_directory = os.path.dirname(os.path.abspath(__file__))
     raw_data_folder = os.path.join(current_directory, '../raw_data')
