@@ -2,6 +2,7 @@ import os
 import requests
 import pandas as pd
 import logging
+import math
 
 def save_to_csv(movie_data_list, csv_file_path):
     df = pd.DataFrame(movie_data_list)
@@ -18,13 +19,19 @@ def save_to_csv(movie_data_list, csv_file_path):
 
 def fetch_top_movies(api_key, num_movies):
     try:
-        url = f'https://api.themoviedb.org/3/movie/top_rated?api_key={api_key}&language=en-US&page=1'
-        response = requests.get(url)
-        response.raise_for_status()
+        # Calculate the number of pages needed based on the desired number of movies
+        num_pages = math.ceil(num_movies / 20)  # TMDb API returns 20 movies per page
 
-        top_movies = response.json()['results'][:num_movies]
+        top_movies = []
 
-        return [{'id': movie['id'], 'imdb_id': movie.get('imdb_id', '')} for movie in top_movies]
+        for page in range(1, num_pages + 1):
+            url = f'https://api.themoviedb.org/3/movie/top_rated?api_key={api_key}&language=en-US&page={page}'
+            response = requests.get(url)
+            response.raise_for_status()
+
+            top_movies.extend(response.json()['results'])
+
+        return [{'id': movie['id'], 'imdb_id': movie.get('imdb_id', '')} for movie in top_movies[:num_movies]]
     except requests.RequestException as e:
         logging.error(f"Request for top-rated movies encountered an error: {e}")
         return []
@@ -63,7 +70,7 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
 
     tmdb_api_key = 'd021967347b5820224a56f0b1c0496b4'  # Replace with your actual TMDB API key
-    num_movies = 10
+    num_movies = 50 # Set the number of movies to fetch
 
     current_directory = os.path.dirname(os.path.abspath(__file__))
     raw_data_folder = os.path.join(current_directory, '../raw_data')
