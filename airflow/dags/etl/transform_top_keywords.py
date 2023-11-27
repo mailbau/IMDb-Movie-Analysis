@@ -22,7 +22,7 @@ def transform_top_keywords():
 
     # Remove stopwords and specific words to exclude
     stop_words = set(stopwords.words('english'))
-    words_to_exclude = set(['film', 'movie', 'first', 'one'])  # Add any additional words to exclude
+    words_to_exclude = set(['film', 'movie', 'first', 'one', 'ever', 'many', 'like'])  # Add any additional words to exclude
     filtered_tokens = [word.lower() for word in tokens if word.isalpha() and word.lower() not in stop_words and word.lower() not in words_to_exclude]
 
     # Count the frequency of each word
