@@ -73,7 +73,8 @@ def extract_movie_data(**kwargs):
     num_movies = 10 # Set the number of movies to fetch
 
     current_directory = os.path.dirname(os.path.abspath(__file__))
-    raw_data_folder = os.path.join(current_directory, '../raw_data')
+    raw_data_folder = os.path.join(current_directory, 'raw_data')
+    os.makedirs(raw_data_folder, exist_ok=True)
     csv_file_path = os.path.join(raw_data_folder, 'movie_data.csv')
 
     movie_ids = fetch_top_movies(tmdb_api_key, num_movies)

@@ -50,7 +50,7 @@ def extract_imdb_reviews():
     logging.basicConfig(level=logging.INFO)
 
     current_directory = os.path.dirname(os.path.abspath(__file__))
-    raw_data_folder = os.path.join(current_directory, '../raw_data')
+    raw_data_folder = os.path.join(current_directory, 'raw_data')
     
     movie_csv_file_path = os.path.join(raw_data_folder, 'movie_data.csv')
     user_reviews_csv_file_path = os.path.join(raw_data_folder, 'user_reviews.csv')
