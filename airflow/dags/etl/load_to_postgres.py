@@ -11,7 +11,7 @@ def load_to_postgres():
     df_combined = pd.read_csv(csv_path)
 
     # Connect to PostgreSQL
-    engine = create_engine('postgresql://postgres:ilovejunkfood321@host.docker.internal:5432/RekDat_IMDb')
+    engine = create_engine('postgresql://postgres:ilovejunkfood321@localhost:5432/RekDat_IMDb')
 
     # Write the DataFrame to PostgreSQL
     df_combined.to_sql('movie_data', engine, if_exists='replace', index=False)
