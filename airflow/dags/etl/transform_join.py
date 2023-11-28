@@ -20,7 +20,7 @@ def transform_join():
 
     # Save the updated DataFrame to a new CSV file
     combined_csv_path = os.path.join(current_directory, 'combined_data.csv')
-    df_reviews.to_csv(combined_csv_path, index=False)
+    df_combined.to_csv(combined_csv_path, index=False)
 
 if __name__ == '__main__':
     transform_join()
